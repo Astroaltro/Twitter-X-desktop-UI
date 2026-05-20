@@ -1,173 +1,209 @@
-import { useState } from 'react';
 import { 
-  Tv, Search, Heart, MessageCircle, Bookmark, Share2, 
-  Home, Users, Plus, Inbox, User, Music 
+  Home, Search, Bell, Users, MessageSquare, Zap, 
+  Bookmark, ShieldCheck, User, MoreHorizontal, 
+  Image as ImageIcon, Smile, Calendar, MapPin, 
+  ListTodo, Repeat2, Heart, BarChart2, Share, CheckCircle2
 } from 'lucide-react';
 import './App.css';
 
 function App() {
-  // State for Navigation and Actions
-  const [activeTopTab, setActiveTopTab] = useState('For You');
-  const [activeBottomNav, setActiveBottomNav] = useState('Home');
-  const [isLiked, setIsLiked] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
-
-  // Generic handler for buttons without specific views yet
-  const handleActionClick = (actionName: string) => {
-    alert(`${actionName} clicked!`);
-  };
-
   return (
     <div className="app-container">
-      {/* Background Video Placeholder */}
-      <div className="video-background">
-        <div className="video-placeholder">
-          {/* We can show different content based on the active tab */}
-          {activeTopTab === 'Following' ? (
-             <div className="content-text">Following Feed</div>
-          ) : (
-             <div className="content-text">For You Feed</div>
-          )}
-        </div>
-        
-        {/* Swipe Up Overlay */}
-        <div className="swipe-up-overlay">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" className="hand-icon">
-            <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0a2 2 0 0 0-2 2v2.5" />
-            <path d="M14 11V9a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v5" />
-            <path d="M10 14V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v10" />
-            <path d="M6 14v-2a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8a6 6 0 0 0 6 6h1a7 7 0 0 0 7-7v-5a2 2 0 0 0-2-2h-1" />
-          </svg>
-          <h2>Swipe up for more</h2>
-        </div>
-      </div>
+      {/* Left Sidebar */}
+      <header className="left-sidebar">
+        <div className="nav-container">
+          <div className="logo-container">
+            <span className="x-logo">𝕏</span>
+          </div>
+          
+          <nav className="nav-links">
+            <div className="nav-item active">
+              <Home size={26} strokeWidth={2.5} />
+              <span>Home</span>
+            </div>
+            <div className="nav-item">
+              <Search size={26} />
+              <span>Explore</span>
+            </div>
+            <div className="nav-item">
+              <div className="icon-badge-wrapper">
+                <Bell size={26} />
+                <span className="badge">2</span>
+              </div>
+              <span>Notifications</span>
+            </div>
+            <div className="nav-item">
+              <Users size={26} />
+              <span>Follow</span>
+            </div>
+            <div className="nav-item">
+              <MessageSquare size={26} />
+              <span>Chat</span>
+            </div>
+            <div className="nav-item">
+              <Zap size={26} />
+              <span>Grok</span>
+            </div>
+            <div className="nav-item">
+              <Bookmark size={26} />
+              <span>Bookmarks</span>
+            </div>
+            <div className="nav-item">
+              <span className="x-logo-small">𝕏</span>
+              <span>Premium</span>
+              <span className="premium-tag">50% off</span>
+            </div>
+            <div className="nav-item">
+              <User size={26} />
+              <span>Profile</span>
+            </div>
+            <div className="nav-item">
+              <MoreHorizontal size={26} />
+              <span>More</span>
+            </div>
+          </nav>
 
-      {/* Top Navigation */}
-      <header className="top-nav">
-        <div className="nav-icon interactive" onClick={() => handleActionClick('Live')}>
-          <Tv size={24} />
-          <span className="live-badge">LIVE</span>
+          <button className="post-btn-large">Post</button>
         </div>
-        <div className="center-tabs">
-          <span 
-            className={`tab interactive ${activeTopTab === 'Following' ? 'active' : ''}`}
-            onClick={() => setActiveTopTab('Following')}
-          >
-            Following
-          </span>
-          <span 
-            className={`tab interactive ${activeTopTab === 'For You' ? 'active' : ''}`}
-            onClick={() => setActiveTopTab('For You')}
-          >
-            For You
-          </span>
-        </div>
-        <div className="nav-icon interactive" onClick={() => handleActionClick('Search')}>
-          <Search size={24} />
+
+        <div className="profile-pill">
+          <img src="https://ui-avatars.com/api/?name=Bangla+Senpai&background=random" alt="Profile" className="avatar" />
+          <div className="profile-info">
+            <div className="name">Bangla </div>
+            <div className="handle">@bangala</div>
+          </div>
+          <MoreHorizontal size={20} className="more-icon" />
         </div>
       </header>
 
-      {/* Right Sidebar Actions */}
+      {/* Main Feed Column */}
+      <main className="main-feed">
+        {/* Top Header */}
+        <div className="feed-header">
+          <div className="tab active">
+            <span>For you</span>
+            <div className="active-indicator"></div>
+          </div>
+          <div className="tab">
+            <span>Following</span>
+          </div>
+        </div>
+
+        {/* Post Composer */}
+        <div className="post-composer">
+          <img src="https://ui-avatars.com/api/?name=Bangla+Senpai&background=random" alt="Profile" className="avatar" />
+          <div className="composer-content">
+            <input type="text" placeholder="What's happening?" className="composer-input" />
+            <div className="composer-actions">
+              <div className="action-icons">
+                <ImageIcon size={20} className="icon-blue" />
+                <div className="gif-icon icon-blue">GIF</div>
+                <ListTodo size={20} className="icon-blue" />
+                <Smile size={20} className="icon-blue" />
+                <Calendar size={20} className="icon-blue" />
+                <MapPin size={20} className="icon-blue disabled" />
+              </div>
+              <button className="post-btn-small" disabled>Post</button>
+            </div>
+          </div>
+        </div>
+
+        {/* Feed Posts */}
+        <div className="post">
+          <img src="https://ui-avatars.com/api/?name=Elon+Musk&background=random" alt="Elon Musk" className="avatar" />
+          <div className="post-content">
+            <div className="post-header">
+              <span className="name">Elon Musk</span>
+              <CheckCircle2 size={16} className="verified-icon" fill="#1d9bf0" color="white" />
+              <span className="x-badge">𝕏</span>
+              <span className="handle">@elonmusk · May 18</span>
+              <MoreHorizontal size={18} className="more-options" />
+            </div>
+            
+            {/* Simulating Video Placeholder */}
+            <div className="post-media video-placeholder">
+              <div className="video-info">
+                <span>5:27</span>
+                <span>From 🛡️ Ignorance, the root and stem of all evil</span>
+              </div>
+            </div>
+
+            <div className="post-engagements">
+              <div className="engagement"><MessageSquare size={18} /> 9.2K</div>
+              <div className="engagement"><Repeat2 size={18} /> 23K</div>
+              <div className="engagement"><Heart size={18} /> 156K</div>
+              <div className="engagement"><BarChart2 size={18} /> 55M</div>
+              <div className="engagement actions">
+                <Bookmark size={18} />
+                <Share size={18} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Ad Post */}
+        <div className="post">
+          <img src="https://ui-avatars.com/api/?name=HOTD&background=random" alt="HOTDZero" className="avatar" />
+          <div className="post-content">
+            <div className="post-header">
+              <span className="name">[HOTDZero] HIGH SCHOOL OF THE DEAD ...</span>
+              <CheckCircle2 size={16} className="verified-icon gold" fill="#ffd700" color="black" />
+              <span className="handle">@HOTD_Ze... · Ad</span>
+              <MoreHorizontal size={18} className="more-options" />
+            </div>
+            <div className="post-text">
+              The TV anime 'HOTD' is being made into a game after about 15 years!
+              &lt;Them&gt; are coming—A survival tower defense game set at the dawn of the apocalypse.<br/><br/>
+              Start now and receive items worth over $600!
+            </div>
+            <div className="post-media ad-placeholder">
+              <span className="ad-tag">HOTD</span>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      {/* Right Sidebar */}
       <aside className="right-sidebar">
-        <div className="action-item profile-wrapper interactive" onClick={() => handleActionClick('Profile Follow')}>
-          <div className="profile-pic">
-            <img src="https://ui-avatars.com/api/?name=Cat&background=random" alt="Profile" />
+        <div className="search-bar">
+          <Search size={20} className="search-icon" />
+          <input type="text" placeholder="Search" />
+        </div>
+
+        <div className="sidebar-card premium-card">
+          <h2>Subscribe to Premium <span className="premium-tag small">50% off</span></h2>
+          <p>Get rid of ads, see your analytics, boost your replies and unlock 20+ features.</p>
+          <button className="subscribe-btn">Subscribe</button>
+        </div>
+
+        <div className="sidebar-card news-card">
+          <h2>Today's News</h2>
+          
+          <div className="trend-item">
+            <div className="trend-title">Wembanyama's 41-24 Double-Double Powers Spurs to Game 1 Win Over Thunder</div>
+            <div className="trend-meta">
+              <img src="https://ui-avatars.com/api/?name=Sport&background=random" className="tiny-avatar" alt="Sport" />
+              <span>1 day ago · Sports · 232.8K posts</span>
+            </div>
           </div>
-          <div className="plus-button">
-            <Plus size={12} strokeWidth={4} />
+          
+          <div className="trend-item">
+            <div className="trend-title">Dani Carvajal to Leave Real Madrid After 23 Years</div>
+            <div className="trend-meta">
+              <img src="https://ui-avatars.com/api/?name=News&background=random" className="tiny-avatar" alt="News" />
+              <span>2 days ago · Sports · 123.6K posts</span>
+            </div>
           </div>
         </div>
         
-        <div className="action-item interactive" onClick={() => setIsLiked(!isLiked)}>
-          <Heart 
-            size={32} 
-            fill={isLiked ? "#fe2c55" : "white"} 
-            color={isLiked ? "#fe2c55" : "white"} 
-            className={isLiked ? "pop-animation" : ""}
-          />
-          <span>{isLiked ? "2.8M" : "2.7M"}</span>
-        </div>
-        
-        <div className="action-item interactive" onClick={() => handleActionClick('Comments')}>
-          <MessageCircle size={32} fill="white" />
-          <span>10.8K</span>
-        </div>
-        
-        <div className="action-item interactive" onClick={() => setIsSaved(!isSaved)}>
-          <Bookmark 
-            size={32} 
-            fill={isSaved ? "#eccb38" : "white"} 
-            color={isSaved ? "#eccb38" : "white"}
-            className={isSaved ? "pop-animation" : ""}
-          />
-          <span>{isSaved ? "193.8K" : "193.7K"}</span>
-        </div>
-        
-        <div className="action-item interactive" onClick={() => handleActionClick('Share')}>
-          <Share2 size={32} fill="white" />
-          <span>591.3K</span>
-        </div>
-        
-        <div className="action-item audio-record interactive" onClick={() => handleActionClick('Audio')}>
-          <div className="record-disc">
-            <Music size={16} color="black" />
+        <div className="sidebar-card trends-card">
+          <h2>What's happening</h2>
+          <div className="trend-item">
+            <div className="trend-category">Trending in Bangladesh <MoreHorizontal size={16} /></div>
+            <div className="trend-name">#ReactJS</div>
           </div>
         </div>
       </aside>
-
-      {/* Bottom Left Info */}
-      <div className="bottom-info">
-        <h3 className="username">@Funny Animal Daily</h3>
-        <p className="description">#cat</p>
-        <div className="audio-info interactive" onClick={() => handleActionClick('Original Audio')}>
-          <Music size={16} />
-          <span>Contains: JUMP - BLACK...</span>
-        </div>
-      </div>
-
-      {/* Bottom Navigation Bar */}
-      <nav className="bottom-nav">
-        <div 
-          className={`nav-item interactive ${activeBottomNav === 'Home' ? 'active' : ''}`}
-          onClick={() => setActiveBottomNav('Home')}
-        >
-          <Home size={24} fill={activeBottomNav === 'Home' ? "white" : "transparent"} />
-          <span>Home</span>
-        </div>
-        
-        <div 
-          className={`nav-item interactive ${activeBottomNav === 'Friends' ? 'active' : ''}`}
-          onClick={() => setActiveBottomNav('Friends')}
-        >
-          <div className="icon-with-badge">
-            <Users size={24} fill={activeBottomNav === 'Friends' ? "white" : "transparent"} />
-            <span className="dot-badge"></span>
-          </div>
-          <span>Friends</span>
-        </div>
-        
-        <div className="nav-item create-btn-wrapper interactive" onClick={() => handleActionClick('Create')}>
-          <div className="create-btn">
-            <Plus size={20} strokeWidth={3} color="black" />
-          </div>
-        </div>
-        
-        <div 
-          className={`nav-item interactive ${activeBottomNav === 'Inbox' ? 'active' : ''}`}
-          onClick={() => setActiveBottomNav('Inbox')}
-        >
-          <Inbox size={24} fill={activeBottomNav === 'Inbox' ? "white" : "transparent"} />
-          <span>Inbox</span>
-        </div>
-        
-        <div 
-          className={`nav-item interactive ${activeBottomNav === 'Profile' ? 'active' : ''}`}
-          onClick={() => setActiveBottomNav('Profile')}
-        >
-          <User size={24} fill={activeBottomNav === 'Profile' ? "white" : "transparent"} />
-          <span>Profile</span>
-        </div>
-      </nav>
     </div>
   );
 }
